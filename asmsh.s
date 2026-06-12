@@ -21,3 +21,11 @@ display_prompt:
     mov r7, #4              // syscall number for sys_write (ARM 32-bit is 4)
     swi 0                   // software interrupt (syscall)
     ret
+
+read_input:
+    mov r0, #0              // File descriptor 0 (stdin)
+    ldr r1, =buffer         // Load address of our buffer
+    mov r2, #100            // Max bytes to read
+    mov r7, #3              // syscall number for sys_read (ARM 32-bit is 3)
+    swi 0                   // software interrupt (syscall)
+    ret
