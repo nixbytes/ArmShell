@@ -29,3 +29,13 @@ read_input:
     mov r7, #3              // syscall number for sys_read (ARM 32-bit is 3)
     swi 0                   // software interrupt (syscall)
     ret
+
+execute_command:
+    // For now, we will just demonstrate the FORK logic.
+    mov r7, #291            // syscall number for sys_fork (ARM 32-bit is 291)
+    swi 0                   // software interrupt (syscall)
+
+    // After fork, r0 contains: 0 if child, PID if parent
+    cmp r0, #0
+    beq child_process
+    b   parent_process
